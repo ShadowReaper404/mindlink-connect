@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import ConnectionOptions from "@/components/ConnectionOptions";
 import StatsSection from "@/components/StatsSection";
 import TrustSection from "@/components/TrustSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import SOSButton from "@/components/SOSButton";
@@ -15,6 +16,7 @@ const Index = () => {
       <ConnectionOptions />
       <StatsSection />
       <TrustSection />
+      <TestimonialsSection />
       <FAQSection />
       <Footer />
       <SOSButton />
