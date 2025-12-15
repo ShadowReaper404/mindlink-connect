@@ -24,18 +24,26 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md shadow-md border-b border-border"
-          : "bg-transparent"
+          ? "bg-background/80 backdrop-blur-xl shadow-2xl border-b border-primary/20 shadow-primary/5"
+          : "bg-gradient-to-b from-background/60 to-transparent backdrop-blur-sm"
       }`}
     >
-      <div className="container px-4 mx-auto">
+      {/* Glassmorphism overlay */}
+      {isScrolled && (
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none" />
+      )}
+      
+      <div className="container px-4 mx-auto relative z-10">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-2 hover-scale cursor-pointer">
-            <Heart className="h-6 w-6 text-primary" fill="currentColor" />
-            <span className="text-xl font-bold text-foreground">Project Anon</span>
+          <div className="flex items-center gap-2 hover-scale cursor-pointer group">
+            <div className="relative">
+              <Heart className="h-6 w-6 text-primary group-hover:scale-110 transition-transform duration-300" fill="currentColor" />
+              <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full group-hover:bg-primary/30 transition-all duration-300" />
+            </div>
+            <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">Project Anon</span>
           </div>
 
           {/* Desktop Navigation */}
@@ -44,9 +52,10 @@ const Navbar = () => {
               <a
                 key={link.label}
                 href={link.href}
-                className="text-foreground hover:text-primary transition-colors duration-200 font-medium story-link"
+                className="text-foreground/90 hover:text-primary transition-all duration-300 font-medium story-link relative group"
               >
-                {link.label}
+                <span className="relative z-10">{link.label}</span>
+                <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-0 blur-sm" />
               </a>
             ))}
           </div>
@@ -54,9 +63,13 @@ const Navbar = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link to="/signin">
-              <Button variant="ghost">Sign In</Button>
+              <Button variant="ghost" className="backdrop-blur-sm hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-300">
+                Sign In
+              </Button>
             </Link>
-            <Button variant="hero">Get Started</Button>
+            <Button variant="hero" className="shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105">
+              Get Started
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -71,23 +84,27 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 animate-fade-in">
+          <div className="md:hidden py-4 animate-fade-in backdrop-blur-xl bg-background/95 rounded-b-2xl border-b border-primary/20 shadow-xl">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-foreground hover:text-primary transition-colors duration-200 font-medium py-2"
+                  className="text-foreground hover:text-primary transition-all duration-300 font-medium py-2 px-4 rounded-lg hover:bg-primary/10 backdrop-blur-sm"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="flex flex-col gap-2 pt-2 border-t border-border">
+              <div className="flex flex-col gap-2 pt-2 border-t border-primary/20">
                 <Link to="/signin">
-                  <Button variant="ghost" className="w-full">Sign In</Button>
+                  <Button variant="ghost" className="w-full backdrop-blur-sm hover:bg-primary/10 border border-transparent hover:border-primary/20">
+                    Sign In
+                  </Button>
                 </Link>
-                <Button variant="hero" className="w-full">Get Started</Button>
+                <Button variant="hero" className="w-3/4 mx-auto h-10 text-sm shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
+                  Get Started
+                </Button>
               </div>
             </div>
           </div>

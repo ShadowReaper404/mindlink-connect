@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Book, FileText, Headphones, Phone, Play, Pause, ChevronRight, Globe, ExternalLink } from "lucide-react";
+import { Book, FileText, Headphones, Phone, Play, Pause, ChevronRight, Globe, ExternalLink, Sparkles, Brain, Heart, Zap } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -33,9 +33,9 @@ const meditations = [
 ];
 
 const hotlines = [
-  { country: "United States", name: "988 Suicide & Crisis Lifeline", number: "988", available: "24/7" },
-  { country: "United Kingdom", name: "Samaritans", number: "116 123", available: "24/7" },
-  { country: "Canada", name: "Crisis Services Canada", number: "1-833-456-4566", available: "24/7" },
+  { country: "Sri Lanka", name: "1926 - National Mental Health Helpline", number: "1926", available: "24/7" },
+  { country: "Sri Lanka", name: "Women In Need Helpline", number: "+94 77 567 65 55", available: "24/7" },
+  { country: "Sri Lanka", name: "Ministry of Women and Child Affairs Women’s Helpline", number: "1938", available: "24/7" },
   { country: "Australia", name: "Lifeline Australia", number: "13 11 14", available: "24/7" },
   { country: "India", name: "iCall", number: "9152987821", available: "Mon-Sat 8am-10pm" },
   { country: "Germany", name: "Telefonseelsorge", number: "0800 111 0 111", available: "24/7" },
@@ -57,39 +57,68 @@ const ResourcesSection = () => {
     setPlayingId(playingId === id ? null : id);
   };
 
+  // Category color themes
+  const categoryColors: Record<string, string> = {
+    Anxiety: "from-blue-500/10 to-blue-600/10 border-blue-500/20",
+    Depression: "from-purple-500/10 to-purple-600/10 border-purple-500/20",
+    "Self-Care": "from-pink-500/10 to-pink-600/10 border-pink-500/20",
+    Mindfulness: "from-green-500/10 to-green-600/10 border-green-500/20",
+    Wellness: "from-amber-500/10 to-amber-600/10 border-amber-500/20",
+    Stress: "from-red-500/10 to-red-600/10 border-red-500/20",
+    all: "from-primary/10 to-primary/10 border-primary/20"
+  };
+
+  const categoryIcons: Record<string, any> = {
+    Anxiety: Brain,
+    Depression: Heart,
+    "Self-Care": Sparkles,
+    Mindfulness: Zap,
+    Wellness: Heart,
+    Stress: Brain
+  };
+
   return (
-    <section id="resources" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-4">
+    <section id="resources" className="py-20 bg-gradient-to-b from-background via-muted/30 to-background relative overflow-hidden">
+      {/* Decorative Background Elements */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div 
           ref={isVisible.ref}
           className={`text-center mb-12 transition-all duration-700 ${isVisible.isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
-          <Badge variant="outline" className="mb-4 px-4 py-1">
+          <Badge variant="outline" className="mb-4 px-4 py-1.5 backdrop-blur-sm bg-primary/5">
+            <Book className="w-3 h-3 mr-1.5 inline" />
             Resources
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 flex items-center justify-center gap-3">
+            <Sparkles className="w-8 h-8 text-primary animate-pulse" />
             Mental Health Resources
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
             Explore our curated collection of articles, guides, meditations, and crisis support resources.
           </p>
         </div>
 
         <Tabs defaultValue="articles" className="w-full">
-          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8">
-            <TabsTrigger value="articles" className="flex items-center gap-2">
+          <TabsList className="grid w-full max-w-2xl mx-auto grid-cols-4 mb-8 h-auto p-2 backdrop-blur-lg bg-card/50 border border-border/50">
+            <TabsTrigger value="articles" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary/10">
               <Book className="w-4 h-4" />
               <span className="hidden sm:inline">Articles</span>
             </TabsTrigger>
-            <TabsTrigger value="guides" className="flex items-center gap-2">
+            <TabsTrigger value="guides" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary/10">
               <FileText className="w-4 h-4" />
               <span className="hidden sm:inline">Guides</span>
             </TabsTrigger>
-            <TabsTrigger value="meditations" className="flex items-center gap-2">
+            <TabsTrigger value="meditations" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary/10">
               <Headphones className="w-4 h-4" />
               <span className="hidden sm:inline">Meditations</span>
             </TabsTrigger>
-            <TabsTrigger value="hotlines" className="flex items-center gap-2">
+            <TabsTrigger value="hotlines" className="flex items-center gap-2 py-3 data-[state=active]:bg-primary/10">
               <Phone className="w-4 h-4" />
               <span className="hidden sm:inline">Hotlines</span>
             </TabsTrigger>
@@ -114,30 +143,40 @@ const ResourcesSection = () => {
             </ScrollArea>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredArticles.map((article, index) => (
-                <Card 
-                  key={article.id} 
-                  className="group cursor-pointer hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge variant="secondary">{article.category}</Badge>
-                      <span className="text-sm text-muted-foreground">{article.readTime}</span>
+              {filteredArticles.map((article, index) => {
+                const CategoryIcon = categoryIcons[article.category] || Book;
+                return (
+                  <Card 
+                    key={article.id} 
+                    className={`group cursor-pointer hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm bg-gradient-to-br ${categoryColors[article.category] || categoryColors.all} border relative overflow-hidden`}
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    {/* Decorative Icon Background */}
+                    <div className="absolute -right-4 -top-4 opacity-10">
+                      <CategoryIcon className="w-24 h-24" />
                     </div>
-                    <CardTitle className="group-hover:text-primary transition-colors">
-                      {article.title}
-                    </CardTitle>
-                    <CardDescription>{article.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button variant="ghost" className="group/btn p-0 h-auto hover:bg-transparent">
-                      Read More 
-                      <ChevronRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+                    <CardHeader className="relative z-10">
+                      <div className="flex items-center justify-between mb-3">
+                        <Badge variant="secondary" className="backdrop-blur-sm">
+                          <CategoryIcon className="w-3 h-3 mr-1" />
+                          {article.category}
+                        </Badge>
+                        <span className="text-sm text-muted-foreground font-medium">{article.readTime}</span>
+                      </div>
+                      <CardTitle className="group-hover:text-primary transition-colors text-xl">
+                        {article.title}
+                      </CardTitle>
+                      <CardDescription>{article.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent className="relative z-10">
+                      <Button variant="ghost" className="group/btn p-0 h-auto hover:bg-transparent text-primary font-semibold">
+                        Read More 
+                        <ChevronRight className="w-4 h-4 ml-1 group-hover/btn:translate-x-2 transition-transform" />
+                      </Button>
+                    </CardContent>
+                  </Card>
+                );
+              })}
             </div>
           </TabsContent>
 
@@ -146,12 +185,12 @@ const ResourcesSection = () => {
               {guides.map((guide, index) => (
                 <Card 
                   key={guide.id}
-                  className="group hover:shadow-lg transition-all duration-300"
+                  className="group hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 backdrop-blur-sm bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <CardHeader>
                     <div className="flex items-center gap-4">
-                      <div className="w-16 h-20 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <div className="w-16 h-20 bg-primary/20 rounded-lg flex items-center justify-center group-hover:bg-primary/30 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3 shadow-lg">
                         <FileText className="w-8 h-8 text-primary" />
                       </div>
                       <div className="flex-1">
@@ -179,8 +218,8 @@ const ResourcesSection = () => {
               {meditations.map((meditation, index) => (
                 <Card 
                   key={meditation.id}
-                  className={`group cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                    playingId === meditation.id ? 'ring-2 ring-primary bg-primary/5' : ''
+                  className={`group cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 backdrop-blur-sm ${
+                    playingId === meditation.id ? 'ring-2 ring-primary bg-gradient-to-br from-primary/20 to-primary/10 border-primary/30' : 'bg-gradient-to-br from-card to-muted/30'
                   }`}
                   style={{ animationDelay: `${index * 100}ms` }}
                   onClick={() => togglePlay(meditation.id)}
@@ -220,10 +259,13 @@ const ResourcesSection = () => {
           </TabsContent>
 
           <TabsContent value="hotlines" className="space-y-6">
-            <Card className="border-destructive/20 bg-destructive/5">
-              <CardContent className="p-4">
-                <p className="text-sm text-destructive font-medium">
-                  If you're in immediate danger, please call your local emergency services immediately.
+            <Card className="border-destructive/30 bg-gradient-to-r from-destructive/10 to-destructive/5 backdrop-blur-sm">
+              <CardContent className="p-5 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-destructive/20 flex items-center justify-center animate-pulse">
+                  <Phone className="w-5 h-5 text-destructive" />
+                </div>
+                <p className="text-sm text-destructive font-semibold">
+                  🚨 If you're in immediate danger, please call your local emergency services immediately.
                 </p>
               </CardContent>
             </Card>
@@ -232,7 +274,7 @@ const ResourcesSection = () => {
               {hotlines.map((hotline, index) => (
                 <Card 
                   key={hotline.country}
-                  className="group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                  className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm bg-gradient-to-br from-card to-muted/30 border-primary/20 hover:border-primary/40"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <CardContent className="p-4">
