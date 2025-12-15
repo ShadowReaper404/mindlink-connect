@@ -27,7 +27,7 @@ const testimonials: Testimonial[] = [
     role: "Connected with Volunteer",
     story: "I was going through a really dark time and did not know where to turn. Finding someone who would just listen without judgment changed everything for me. The volunteer I spoke with was so compassionate and helped me see that I was not alone. Three months later, I am in a much better place.",
     rating: 5,
-    month: "March 2024",
+    month: "March 2025",
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const testimonials: Testimonial[] = [
     role: "Anonymous Peer Support",
     story: "As someone who struggles with anxiety, talking to others who truly understand what it feels like has been incredibly validating. The anonymous chat gave me the courage to open up without fear. I have made real connections and learned coping strategies that actually work.",
     rating: 5,
-    month: "February 2024",
+    month: "February 2025",
   },
   {
     id: 3,
@@ -45,7 +45,7 @@ const testimonials: Testimonial[] = [
     role: "Professional Therapy",
     story: "After years of putting it off, I finally reached out for professional help through this platform. My therapist has been amazing and the convenience of online sessions made it so much easier to commit. I wish I had done this sooner. My relationships and work life have improved dramatically.",
     rating: 5,
-    month: "January 2024",
+    month: "January 2025",
   },
   {
     id: 4,
@@ -54,7 +54,7 @@ const testimonials: Testimonial[] = [
     role: "Crisis Support",
     story: "During my darkest moment, the SOS button literally saved my life. Within minutes, I was connected to someone who talked me through my crisis and helped me get the emergency support I needed. I am forever grateful for this service and the caring people behind it.",
     rating: 5,
-    month: "December 2023",
+    month: "December 2024",
   },
   {
     id: 5,
