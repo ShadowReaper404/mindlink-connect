@@ -75,7 +75,11 @@ const ConnectionOptions = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-300" />
-                <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground group-hover:scale-110 transition-transform duration-200">
+                <Badge className={`absolute top-4 right-4 group-hover:scale-110 transition-transform duration-200 ${
+                  option.badge === "Premium" 
+                    ? "bg-gradient-to-r from-yellow-500 to-amber-600 text-white font-semibold shadow-lg shadow-yellow-500/50" 
+                    : "bg-primary text-primary-foreground"
+                }`}>
                   {option.badge}
                 </Badge>
               </div>
