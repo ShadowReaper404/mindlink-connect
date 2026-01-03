@@ -202,10 +202,75 @@ All colors MUST be HSL.
     filter: blur(45px);
   }
   
+  @keyframes aurora-4 {
+    0%, 100% {
+      transform: translate(0%, 0%) rotate(0deg) scale(1);
+      opacity: 1;
+    }
+    25% {
+      transform: translate(12%, -12%) rotate(45deg) scale(1.2);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(-8%, 15%) rotate(90deg) scale(0.85);
+      opacity: 1;
+    }
+    75% {
+      transform: translate(15%, 8%) rotate(135deg) scale(1.1);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes aurora-5 {
+    0%, 100% {
+      transform: translate(0%, 0%) scale(1.05) rotate(180deg);
+      opacity: 1;
+    }
+    33% {
+      transform: translate(-12%, 10%) scale(0.9) rotate(270deg);
+      opacity: 1;
+    }
+    66% {
+      transform: translate(10%, -12%) scale(1.15) rotate(360deg);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes shimmer {
+    0%, 100% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(100%);
+      opacity: 0.3;
+    }
+  }
+  
+  .animate-aurora-4 {
+    animation: aurora-4 28s ease-in-out infinite;
+    animation-delay: -7s;
+    filter: blur(55px);
+  }
+  
+  .animate-aurora-5 {
+    animation: aurora-5 32s ease-in-out infinite;
+    animation-delay: -15s;
+    filter: blur(60px);
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 8s ease-in-out infinite;
+    filter: blur(30px);
+  }
+  
   @media (prefers-reduced-motion: reduce) {
     .animate-aurora-1,
     .animate-aurora-2,
-    .animate-aurora-3 {
+    .animate-aurora-3,
+    .animate-aurora-4,
+    .animate-aurora-5,
+    .animate-shimmer {
       animation: none;
     }
   }
