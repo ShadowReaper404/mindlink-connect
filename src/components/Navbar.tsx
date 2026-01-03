@@ -23,22 +23,11 @@ const Navbar = () => {
   ];
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-2xl border-b border-primary/20 shadow-primary/5"
-          : "bg-gradient-to-b from-background/60 to-transparent backdrop-blur-sm"
-      }`}
-    >
-      {/* Glassmorphism overlay */}
-      {isScrolled && (
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 pointer-events-none" />
-      )}
-      
-      <div className="container px-4 mx-auto relative z-10">
-        <div className="flex items-center justify-between h-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 py-4">
+      <div className="container px-4 mx-auto">
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
-          <div className="flex items-center gap-2 hover-scale cursor-pointer group">
+          <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-background/95 backdrop-blur-md shadow-md border border-primary/20 hover-scale cursor-pointer group hover:shadow-lg hover:border-primary/30 transition-all duration-300">
             <div className="relative">
               <Heart className="h-6 w-6 text-primary group-hover:scale-110 transition-transform duration-300" fill="currentColor" />
               <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full group-hover:bg-primary/30 transition-all duration-300" />
@@ -46,16 +35,19 @@ const Navbar = () => {
             <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">Project Anon</span>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Pill-Style Navigation */}
+          <div className={`hidden lg:flex items-center gap-1 px-2 py-2 rounded-full transition-all duration-500 ${
+            isScrolled 
+              ? "bg-background/95 backdrop-blur-xl shadow-lg border border-cyan-500/30" 
+              : "bg-background/90 backdrop-blur-md shadow-md border border-cyan-500/20"
+          }`}>
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="text-foreground/90 hover:text-primary transition-all duration-300 font-medium story-link relative group"
+                className="px-6 py-2 rounded-full text-foreground/80 hover:text-white hover:bg-gradient-to-r hover:from-cyan-500 hover:to-cyan-600 transition-all duration-300 font-medium relative group hover:shadow-lg hover:shadow-cyan-500/30 hover:scale-105"
               >
-                <span className="relative z-10">{link.label}</span>
-                <div className="absolute inset-0 bg-primary/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300 -z-0 blur-sm" />
+                {link.label}
               </a>
             ))}
           </div>
@@ -63,18 +55,18 @@ const Navbar = () => {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
             <Link to="/signin">
-              <Button variant="ghost" className="backdrop-blur-sm hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all duration-300">
+              <Button variant="ghost" className="rounded-full hover:bg-primary/10">
                 Sign In
               </Button>
             </Link>
-            <Button variant="hero" className="shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105">
+            <Button variant="hero" className="rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 hover:scale-105">
               Get Started
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-foreground hover:text-primary transition-colors"
+            className="md:hidden p-2 text-foreground hover:text-primary transition-colors rounded-full hover:bg-primary/10"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -84,25 +76,25 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden py-4 animate-fade-in backdrop-blur-xl bg-background/95 rounded-b-2xl border-b border-primary/20 shadow-xl">
-            <div className="flex flex-col gap-4">
+          <div className="md:hidden mt-4 py-4 animate-fade-in backdrop-blur-xl bg-background/95 rounded-2xl border border-primary/20 shadow-xl">
+            <div className="flex flex-col gap-2 px-4">
               {navLinks.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-foreground hover:text-primary transition-all duration-300 font-medium py-2 px-4 rounded-lg hover:bg-primary/10 backdrop-blur-sm"
+                  className="text-foreground hover:text-primary transition-all duration-300 font-medium py-3 px-4 rounded-full hover:bg-primary/10"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.label}
                 </a>
               ))}
-              <div className="flex flex-col gap-2 pt-2 border-t border-primary/20">
+              <div className="flex flex-col gap-2 pt-2 mt-2 border-t border-primary/20">
                 <Link to="/signin">
-                  <Button variant="ghost" className="w-full backdrop-blur-sm hover:bg-primary/10 border border-transparent hover:border-primary/20">
+                  <Button variant="ghost" className="w-full rounded-full hover:bg-primary/10">
                     Sign In
                   </Button>
                 </Link>
-                <Button variant="hero" className="w-3/4 mx-auto h-10 text-sm shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
+                <Button variant="hero" className="w-full rounded-full shadow-lg shadow-primary/20">
                   Get Started
                 </Button>
               </div>
