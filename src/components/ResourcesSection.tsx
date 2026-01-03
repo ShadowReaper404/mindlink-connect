@@ -1,19 +1,116 @@
 import { useState } from "react";
-import { Book, FileText, Headphones, Phone, Play, Pause, ChevronRight, Globe, ExternalLink, Sparkles, Brain, Heart, Zap } from "lucide-react";
+import { Book, FileText, Headphones, Phone, Play, Pause, ChevronRight, Globe, ExternalLink, Sparkles, Brain, Heart, Zap, X, Clock, Tag } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const articles = [
-  { id: 1, title: "Understanding Anxiety", category: "Anxiety", readTime: "5 min", description: "Learn about the signs, symptoms, and coping strategies for anxiety." },
-  { id: 2, title: "Coping with Depression", category: "Depression", readTime: "7 min", description: "Practical steps to manage depression and find hope." },
-  { id: 3, title: "Building Resilience", category: "Self-Care", readTime: "4 min", description: "Strengthen your mental resilience with proven techniques." },
-  { id: 4, title: "Mindfulness Basics", category: "Mindfulness", readTime: "6 min", description: "An introduction to mindfulness and its benefits." },
-  { id: 5, title: "Sleep & Mental Health", category: "Wellness", readTime: "5 min", description: "The connection between quality sleep and mental wellbeing." },
-  { id: 6, title: "Stress Management", category: "Stress", readTime: "8 min", description: "Effective strategies to reduce and manage daily stress." },
+  { 
+    id: 1, 
+    title: "Understanding Anxiety", 
+    category: "Anxiety", 
+    readTime: "5 min", 
+    description: "Learn about the signs, symptoms, and coping strategies for anxiety.",
+    fullDescription: "Anxiety is a natural response to stress, but when it becomes overwhelming, it can interfere with daily life. This comprehensive guide explores the different types of anxiety disorders, common symptoms like persistent worry, rapid heartbeat, and difficulty concentrating, and evidence-based coping strategies including breathing exercises, cognitive behavioral techniques, and lifestyle modifications.",
+    keyTakeaways: [
+      "Recognize early warning signs of anxiety",
+      "Practice grounding techniques during anxious moments",
+      "Build a personalized coping toolkit",
+      "Understand when to seek professional help"
+    ],
+    author: "Dr. Sarah Mitchell",
+    publishDate: "Dec 15, 2025"
+  },
+  { 
+    id: 2, 
+    title: "Coping with Depression", 
+    category: "Depression", 
+    readTime: "7 min", 
+    description: "Practical steps to manage depression and find hope.",
+    fullDescription: "Depression affects millions worldwide, but recovery is possible. This article discusses the biological, psychological, and social factors contributing to depression, explores effective treatment options including therapy and medication, and provides practical daily strategies for managing symptoms. Learn how to create structure, maintain social connections, and develop self-compassion during difficult times.",
+    keyTakeaways: [
+      "Understand the science behind depression",
+      "Create a daily routine that supports mental health",
+      "Challenge negative thought patterns",
+      "Build a support network"
+    ],
+    author: "Dr. James Thompson",
+    publishDate: "Dec 10, 2025"
+  },
+  { 
+    id: 3, 
+    title: "Building Resilience", 
+    category: "Self-Care", 
+    readTime: "4 min", 
+    description: "Strengthen your mental resilience with proven techniques.",
+    fullDescription: "Resilience is the ability to bounce back from adversity and adapt to challenging circumstances. This guide teaches you how to develop mental toughness through mindfulness practices, positive relationships, realistic goal-setting, and self-care routines. Discover how to reframe setbacks as learning opportunities and build lasting emotional strength.",
+    keyTakeaways: [
+      "Develop a growth mindset",
+      "Practice self-compassion during setbacks",
+      "Build strong social connections",
+      "Maintain healthy habits during stress"
+    ],
+    author: "Maria Rodriguez, LCSW",
+    publishDate: "Dec 8, 2025"
+  },
+  { 
+    id: 4, 
+    title: "Mindfulness Basics", 
+    category: "Mindfulness", 
+    readTime: "6 min", 
+    description: "An introduction to mindfulness and its benefits.",
+    fullDescription: "Mindfulness is the practice of being fully present in the moment without judgment. This beginner-friendly guide introduces core mindfulness concepts, explains the neuroscience behind its benefits, and provides simple exercises you can start today. Learn how mindfulness can reduce stress, improve focus, enhance emotional regulation, and promote overall well-being.",
+    keyTakeaways: [
+      "Start with just 5 minutes of daily practice",
+      "Learn body scan and breathing techniques",
+      "Bring mindfulness into everyday activities",
+      "Understand the research-backed benefits"
+    ],
+    author: "Dr. Emily Chen",
+    publishDate: "Dec 5, 2025"
+  },
+  { 
+    id: 5, 
+    title: "Sleep & Mental Health", 
+    category: "Wellness", 
+    readTime: "5 min", 
+    description: "The connection between quality sleep and mental wellbeing.",
+    fullDescription: "Sleep and mental health are deeply interconnected. Poor sleep can worsen mental health conditions, while mental health issues can disrupt sleep patterns. This article explores the bidirectional relationship between sleep and mental wellbeing, explains the stages of sleep and their importance, and provides evidence-based strategies for improving sleep quality including sleep hygiene practices, relaxation techniques, and when to seek help for sleep disorders.",
+    keyTakeaways: [
+      "Understand your sleep cycles and their importance",
+      "Create an optimal sleep environment",
+      "Develop a consistent bedtime routine",
+      "Address common sleep disruptors"
+    ],
+    author: "Dr. Michael Park",
+    publishDate: "Dec 1, 2025"
+  },
+  { 
+    id: 6, 
+    title: "Stress Management", 
+    category: "Stress", 
+    readTime: "8 min", 
+    description: "Effective strategies to reduce and manage daily stress.",
+    fullDescription: "Chronic stress can take a toll on both physical and mental health. This comprehensive guide teaches you to identify your stress triggers, understand the body's stress response, and implement practical coping strategies. Learn time management techniques, boundary setting, relaxation exercises, and how to transform your relationship with stress from one of avoidance to skillful management.",
+    keyTakeaways: [
+      "Identify your personal stress triggers",
+      "Practice the 4 A's: Avoid, Alter, Accept, Adapt",
+      "Use progressive muscle relaxation",
+      "Build stress-resistant habits"
+    ],
+    author: "Lisa Anderson, PhD",
+    publishDate: "Nov 28, 2025"
+  },
 ];
 
 const guides = [
@@ -47,6 +144,7 @@ const ResourcesSection = () => {
   const isVisible = useScrollReveal();
   const [playingId, setPlayingId] = useState<number | null>(null);
   const [activeCategory, setActiveCategory] = useState("all");
+  const [selectedArticle, setSelectedArticle] = useState<typeof articles[0] | null>(null);
 
   const categories = ["all", "Anxiety", "Depression", "Self-Care", "Mindfulness", "Wellness", "Stress"];
   const filteredArticles = activeCategory === "all" 
@@ -150,6 +248,7 @@ const ResourcesSection = () => {
                     key={article.id} 
                     className={`group cursor-pointer hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 backdrop-blur-sm bg-gradient-to-br ${categoryColors[article.category] || categoryColors.all} border relative overflow-hidden`}
                     style={{ animationDelay: `${index * 100}ms` }}
+                    onClick={() => setSelectedArticle(article)}
                   >
                     {/* Decorative Icon Background */}
                     <div className="absolute -right-4 -top-4 opacity-10">
@@ -178,6 +277,81 @@ const ResourcesSection = () => {
                 );
               })}
             </div>
+
+            {/* Article Detail Dialog */}
+            <Dialog open={!!selectedArticle} onOpenChange={() => setSelectedArticle(null)}>
+              <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+                {selectedArticle && (
+                  <>
+                    <DialogHeader>
+                      <div className="flex items-center gap-2 mb-3">
+                        <Badge variant="secondary" className="backdrop-blur-sm">
+                          {(() => {
+                            const CategoryIcon = categoryIcons[selectedArticle.category] || Book;
+                            return <CategoryIcon className="w-3 h-3 mr-1" />;
+                          })()}
+                          {selectedArticle.category}
+                        </Badge>
+                        <span className="text-sm text-muted-foreground flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {selectedArticle.readTime}
+                        </span>
+                      </div>
+                      <DialogTitle className="text-2xl md:text-3xl">{selectedArticle.title}</DialogTitle>
+                      <DialogDescription className="text-base pt-2">
+                        {selectedArticle.description}
+                      </DialogDescription>
+                    </DialogHeader>
+                    
+                    <div className="space-y-6 py-4">
+                      {/* Article Meta */}
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground border-l-4 border-primary/30 pl-4 bg-primary/5 py-3 rounded-r">
+                        <span>By {selectedArticle.author}</span>
+                        <span>•</span>
+                        <span>{selectedArticle.publishDate}</span>
+                      </div>
+
+                      {/* Full Description */}
+                      <div className="prose prose-sm max-w-none">
+                        <p className="text-foreground leading-relaxed text-base">
+                          {selectedArticle.fullDescription}
+                        </p>
+                      </div>
+
+                      {/* Key Takeaways */}
+                      <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20 rounded-xl p-6">
+                        <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-foreground">
+                          <Sparkles className="w-5 h-5 text-primary" />
+                          Key Takeaways
+                        </h3>
+                        <ul className="space-y-3">
+                          {selectedArticle.keyTakeaways.map((takeaway, idx) => (
+                            <li key={idx} className="flex items-start gap-3 text-foreground">
+                              <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary text-sm font-semibold mt-0.5">
+                                {idx + 1}
+                              </span>
+                              <span className="text-sm leading-relaxed">{takeaway}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex gap-3 pt-4">
+                        <Button className="flex-1" size="lg">
+                          <Book className="w-4 h-4 mr-2" />
+                          Read Full Article
+                        </Button>
+                        <Button variant="outline" size="lg">
+                          <Heart className="w-4 h-4 mr-2" />
+                          Save
+                        </Button>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </DialogContent>
+            </Dialog>
           </TabsContent>
 
           <TabsContent value="guides" className="space-y-6">
