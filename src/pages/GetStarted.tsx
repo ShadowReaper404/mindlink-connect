@@ -37,40 +37,40 @@ const GetStarted = () => {
 
   const teamMembers = [
     {
-      name: "Dr. Sarah Johnson",
-      role: "Clinical Director",
-      bio: "Licensed clinical psychologist with 15+ years in mental health care. Passionate about making therapy accessible to everyone.",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
+        name: "Mr. Dilshan D Prasanna",
+        role: "Project Manager/ Lead Developer",
+        bio: "Tech entrepreneur with a mission to use technology for social good",
+        image: "#"
     },
     {
-      name: "Michael Chen",
-      role: "Lead Developer",
-      bio: "Tech entrepreneur with a mission to use technology for social good. Previously worked on healthcare platforms.",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+        name: "Mr. Thusiru Kodithuwakku",
+        role: "Back End Developer",
+        bio: "Passionate about building scalable and secure backend systems",
+        image: "#"
     },
     {
-      name: "Emily Rodriguez",
-      role: "Community Manager",
-      bio: "Mental health advocate with lived experience. Trained peer support specialist dedicated to creating safe spaces.",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
+        name: "Ms. Oshadi Ranawaka",
+        role: "UI/ UX Designer",
+        bio: "UX designer specializing in accessible and user-friendly interfaces",
+        image: "#"
     },
     {
-      name: "James Anderson",
-      role: "Operations Lead",
-      bio: "Healthcare operations specialist with 10+ years of experience in building accessible and scalable care systems.",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+      name: "Mr. Thevindu Sithujaya",
+      role: "Front End Developer/ Security Specialist",
+      bio: "Focused on building secure and user-friendly web applications.",
+      image: "#"
     },
     {
-      name: "Dr. Priya Patel",
-      role: "Research Director",
-      bio: "Mental health researcher focused on evidence-based interventions. Published author in peer-reviewed journals.",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop"
+      name: "Ms. Senithi Premaratne",
+      role: "Front End Developer/ Quality Assurance",
+      bio: "Ensures a seamless and bug-free user experience through meticulous testing.",
+      image: "#"
     },
     {
-      name: "Alex Turner",
-      role: "Design Lead",
-      bio: "UX designer specializing in accessible design. Believes technology should be intuitive and welcoming for all.",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop"
+      name: "Ms. Pasandi Nimsara",
+      role: "NODANI",
+      bio: "Mt sithanna ba adahaganna ba hithannawath ida na.",
+      image: "#"
     }
   ];
 
@@ -116,7 +116,7 @@ const GetStarted = () => {
         </div>
 
         {/* Team Section */}
-        <div className="mb-16">
+        <div id="team" className="mb-16 scroll-mt-20">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold mb-4">Meet Our Team</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">

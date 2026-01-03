@@ -1,31 +1,26 @@
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { Linkedin, Mail } from "lucide-react";
+import { Linkedin, Mail, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 const teamMembers = [
   {
-    name: "Dr. Sarah Johnson",
-    role: "Clinical Director",
-    bio: "Licensed clinical psychologist with 15+ years in mental health care",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop"
-  },
-  {
-    name: "Michael Chen",
+    name: "Mr. Dilshan D Prasanna",
     role: "Lead Developer",
-    bio: "Tech entrepreneur passionate about digital mental health solutions",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
+    bio: "Tech entrepreneur with a mission to use technology for social good",
+    image: "#"
   },
   {
-    name: "Emily Rodriguez",
-    role: "Community Manager",
-    bio: "Mental health advocate with lived experience in peer support",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop"
+    name: "Mr. Thusiru Kodithuwakku",
+    role: "Back End Developer",
+    bio: "Passionate about building scalable and secure backend systems",
+    image: "#"
   },
   {
-    name: "James Anderson",
-    role: "Operations Lead",
-    bio: "Healthcare operations specialist focused on accessible care",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop"
+    name: "Ms. Oshadi Ranawaka",
+    role: "Front End Designer",
+    bio: "UX designer specializing in accessible and user-friendly interfaces",
+    image: "#"
   }
 ];
 
@@ -79,6 +74,26 @@ const TeamSection = () => {
               </CardContent>
             </Card>
           ))}
+          
+          {/* View All Card */}
+          <Link to="/get-started/#team">
+            <Card
+              className={`overflow-hidden hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border-primary/30 bg-gradient-to-br from-primary/10 to-secondary/10 backdrop-blur-sm group cursor-pointer h-full flex items-center justify-center ${
+                isVisible ? "animate-fade-in" : "opacity-0"
+              }`}
+              style={{ animationDelay: `${teamMembers.length * 100}ms` }}
+            >
+              <CardContent className="p-6 text-center">
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-4 group-hover:bg-primary/30 transition-colors group-hover:scale-110 duration-300">
+                    <ArrowRight className="h-8 w-8 text-primary group-hover:translate-x-1 transition-transform" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-foreground">View All Team</h3>
+                  <p className="text-sm text-muted-foreground">Meet all 6 team members</p>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
         </div>
       </div>
     </section>
